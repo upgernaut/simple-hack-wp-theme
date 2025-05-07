@@ -51,6 +51,12 @@
   }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const stored = localStorage.getItem('colorScheme');
+  const initial = stored || themeSettings.defaultColorScheme;
+  toggleDarkMode(initial);
+});
+
 
   </script>
 
