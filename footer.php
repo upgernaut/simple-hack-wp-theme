@@ -3,30 +3,55 @@
   </footer>
 
   <script>
-    function toggleDarkMode() {
-      const html = document.documentElement;
-      html.classList.toggle('dark');
-      html.classList.toggle('light');
+  function toggleDarkMode(colorScheme = null) {
+  const html = document.documentElement;
+  const body = document.body;
+  const footer = document.getElementById('footer');
+  const header = document.getElementById('site-header');
 
-      document.body.classList.toggle('bg-white');
-      document.body.classList.toggle('bg-gray-900');
-      document.body.classList.toggle('text-gray-900');
-      document.body.classList.toggle('text-white');
+  // Determine the mode to apply
+  let newMode;
+  if (colorScheme === 'dark' || colorScheme === 'light') {
+    html.classList.remove('dark', 'light');
+    html.classList.add(colorScheme);
+    newMode = colorScheme;
+  } else {
+    html.classList.toggle('dark');
+    html.classList.toggle('light');
+    newMode = html.classList.contains('dark') ? 'dark' : 'light';
+  }
 
-      document.getElementById('site-header').classList.toggle('bg-white');
-      document.getElementById('site-header').classList.toggle('bg-gray-800');
+  // Store preference
+  localStorage.setItem('colorScheme', newMode);
 
-      document.querySelectorAll('p.text-sm').forEach(p => {
-        p.classList.toggle('text-gray-500');
-        p.classList.toggle('text-gray-400');
-      });
+  // Apply styles based on mode
+  const isDark = newMode === 'dark';
 
-      const footer = document.getElementById('footer');
-      if (footer) {
-        footer.classList.toggle('text-gray-500');
-        footer.classList.toggle('text-gray-400');
-      }
-    }
+  body.classList.toggle('bg-white', !isDark);
+  body.classList.toggle('bg-gray-800', isDark);
+  body.classList.toggle('text-gray-900', !isDark);
+  body.classList.toggle('text-gray-200', isDark);
+
+  header.classList.toggle('bg-white', !isDark);
+  header.classList.toggle('bg-gray-800', isDark);
+
+  document.querySelectorAll('p.text-sm').forEach(p => {
+    p.classList.toggle('text-gray-500', !isDark);
+    p.classList.toggle('text-gray-400', isDark);
+  });
+
+  document.querySelectorAll('.logoText').forEach(logoText => {
+    logoText.classList.toggle('text-white', isDark);
+    logoText.classList.toggle('text-gray-900', !isDark);
+  });
+
+  if (footer) {
+    footer.classList.toggle('text-gray-500', !isDark);
+    footer.classList.toggle('text-gray-400', isDark);
+  }
+}
+
+
   </script>
 
   <?php wp_footer(); ?>
