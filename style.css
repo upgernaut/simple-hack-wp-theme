@@ -1,0 +1,15 @@
+/*
+Theme Name: Simple Hack
+Author: upgernaut
+Description: Simple hacker style WordPress theme based on Tailwind. Best if you need something minimalistic to customize later.
+Author URI: https://toolnaut.com
+Version: 1.0
+*/
+
+body {
+    font-size: 1.125rem;
+}
+
+.light .text-green-400 {
+    color: #064E3B;
+}
