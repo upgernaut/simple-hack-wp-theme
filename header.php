@@ -31,7 +31,7 @@
           if (has_custom_logo()) {
             $logo_id = get_theme_mod('custom_logo');
             $logo_url = wp_get_attachment_image_src($logo_id, 'full')[0];
-            echo '<img src="' . esc_url($logo_url) . '" alt="Logo" class="w-11 h-11">';
+            echo '<img src="' . esc_url($logo_url) . '" alt="Logo" class="w-11 h-11 rounded-sm">';
           }
           ?>
           <span><?php bloginfo('name'); ?></span>
