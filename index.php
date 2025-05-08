@@ -6,6 +6,9 @@
   <?php endwhile; else : ?>
     <p>No posts found.</p>
   <?php endif; ?>
+
+  <?php get_template_part('template-parts/content', 'pagination'); ?>
 </main>
+
 
 <?php get_footer(); ?>

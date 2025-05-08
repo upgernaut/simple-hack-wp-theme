@@ -20,11 +20,7 @@
   <?php endif; ?>
   </section>
 
-  <!-- Pagination -->
-  <section class="flex justify-between items-center mt-12">
-    <div><?php previous_posts_link('← Previous Page'); ?></div>
-    <div><?php next_posts_link('Next Page →'); ?></div>
-  </section>
+  <?php get_template_part('template-parts/content', 'pagination'); ?>
 </main>
 
 <?php get_footer(); ?>
