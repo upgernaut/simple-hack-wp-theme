@@ -10,7 +10,7 @@ body {
     font-size: 1.125rem;
 }
 
-.light .text-green-400 {
+html.light #site-header .text-green-400 {
     color: #064E3B;
 }
 
@@ -48,7 +48,7 @@ body {
   }
   
   html.light .text-green-400 {
-    color: #064E3B; /* darker green for contrast */
+    color: #16a34a; /* darker green for contrast */
   }
   
   /* === Dark Mode === */
