@@ -60,6 +60,14 @@ function mytheme_customize_register($wp_customize) {
     wp_localize_script('theme-scripts', 'themeSettings', [
       'defaultColorScheme' => $default_scheme
     ]);
+
+    wp_enqueue_script(
+      'theme-main-js',
+      get_template_directory_uri() . '/js/scripts.js',
+      array(),
+      null,
+      true // load in footer
+    );    
   }
   add_action('wp_enqueue_scripts', 'mytheme_enqueue_scripts');
   
