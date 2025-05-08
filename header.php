@@ -1,5 +1,10 @@
-<!DOCTYPE html>
-<html <?php language_attributes(); ?> class="dark">
+<?php
+$color_scheme = get_theme_mod('default_color_scheme', 'light');; // default
+if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark', 'light'])) {
+    $color_scheme = $_COOKIE['colorScheme'];
+}
+?><!DOCTYPE html>
+<html <?php language_attributes(); ?> class="<?php echo esc_attr($color_scheme); ?>">
 <head>
   <meta charset="<?php bloginfo('charset'); ?>" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
