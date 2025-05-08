@@ -28,7 +28,11 @@ body {
   }
   
   html.light #site-header {
-    background-color: #ffffff;
+    background-color: #f3f4f6;
+    /* border: 2px solid #064E3B; /* Tailwind's green-400 color */
+    border-top: 0;  */
+    /* border-left: 0; 
+    border-right: 0; */
   }
   
   html.light footer {
@@ -55,6 +59,8 @@ body {
   
   html.dark #site-header {
     background-color: #1F2937; /* gray-800 */
+    /* border: 2px solid #111827; 
+    border-top: 0px; */
   }
   
   html.dark footer {
@@ -73,3 +79,14 @@ body {
     color: #10B981; /* green-400 */
   }
   
+  html.dark #floating-search form {
+    background-color: #111827; /* Tailwind's gray-900 color */
+    border: 1px solid #4ade80; /* Tailwind's green-400 color */
+    
+  }
+
+  html.light #floating-search form {
+    background-color: #f3f4f6; /* Tailwind's gray-100 color */
+    border: 1px solid #16a34a; /* Tailwind's green-600 color */
+    
+  }

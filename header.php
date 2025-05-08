@@ -27,7 +27,7 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
   <?php wp_head(); ?>
 </head>
 <body <?php body_class('bg-gray-800 text-gray-200 font-sans transition-colors duration-300'); ?>>
-  <header id="site-header" class="max-w-2xl mx-auto sticky top-0 bg-gray-900 shadow z-50 transition-colors duration-300">
+  <header id="site-header" class="max-w-2xl mx-auto sticky top-0 bg-gray-900 z-50 transition-colors duration-300">
     <div class="max-w-2xl mx-auto flex items-center justify-between p-4">
 
       <div class="text-xl font-bold tracking-widest font-mono logoText text-white flex items-center space-x-2">
