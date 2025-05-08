@@ -2,47 +2,6 @@
     © <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. Built clean and simple.
   </footer>
 
-  <script>
-  function toggleDarkMode(colorScheme = null) {
-  const html = document.documentElement;
-  const body = document.body;
-  const footer = document.getElementById('footer');
-  const header = document.getElementById('site-header');
-
-  // Determine the mode to apply
-  let newMode;
-  if (colorScheme === 'dark' || colorScheme === 'light') {
-    html.classList.remove('dark', 'light');
-    html.classList.add(colorScheme);
-    newMode = colorScheme;
-  } else {
-    html.classList.toggle('dark');
-    html.classList.toggle('light');
-    newMode = html.classList.contains('dark') ? 'dark' : 'light';
-  }
-
-  // Store preference
-  localStorage.setItem('colorScheme', newMode);
-
-  // Apply styles based on mode
-  const isDark = newMode === 'dark';
-
-
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const stored = localStorage.getItem('colorScheme');
-  const initial = stored || themeSettings.defaultColorScheme;
-  toggleDarkMode(initial);
-});
-
-function toggleSearchBar() {
-  const el = document.getElementById('floating-search');
-  el.classList.toggle('hidden');
-}
-  
-  </script>
-
   <?php wp_footer(); ?>
 <div id="floating-search" class="hidden fixed top-16 left-1/2 transform -translate-x-1/2 z-50">
   <form action="/" method="get" class="flex bg-gray-900 border border-green-400 rounded px-2 py-1">
