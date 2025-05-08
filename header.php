@@ -1,10 +1,12 @@
 <?php
 $color_scheme = get_theme_mod('default_color_scheme', 'light');; // default
 if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark', 'light'])) {
-    $color_scheme = $_COOKIE['colorScheme'];
+  $color_scheme = $_COOKIE['colorScheme'];
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?> class="<?php echo esc_attr($color_scheme); ?>">
+
 <head>
   <meta charset="<?php bloginfo('charset'); ?>" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +18,11 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
 
   <!-- Tailwind -->
   <script>
-    tailwind = { config: { darkMode: 'class' } };
+    tailwind = {
+      config: {
+        darkMode: 'class'
+      }
+    };
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -26,37 +32,59 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
 
   <?php wp_head(); ?>
 </head>
+
 <body <?php body_class('bg-gray-800 text-gray-200 font-sans transition-colors duration-300'); ?>>
-  <header id="site-header" class="max-w-2xl mx-auto sticky top-0 bg-gray-900 z-50 transition-colors duration-300">
-    <div class="max-w-2xl mx-auto flex items-center justify-between p-4">
-
-      <div class="text-xl font-bold tracking-widest font-mono logoText text-white flex items-center space-x-2">
-        <a href="<?php echo home_url(); ?>" class="hover:none flex items-center space-x-2">
-          <?php
-          if (has_custom_logo()) {
-            $logo_id = get_theme_mod('custom_logo');
-            $logo_url = wp_get_attachment_image_src($logo_id, 'full')[0];
-            echo '<img src="' . esc_url($logo_url) . '" alt="Logo" class="w-11 h-11 rounded-sm">';
-          }
-          ?>
-          <span><?php bloginfo('name'); ?></span>
-        </a>
-      </div>
-      
-      <nav class="space-x-4 font-mono">
-        <a href="<?php echo home_url(); ?>" class="hover:underline text-green-400">Home</a>
-        <a href="#" class="hover:underline text-green-400">Blog</a>
-        <a href="#" class="hover:underline text-green-400">Contact</a>
-        <button onclick="toggleDarkMode()" class="ml-4 text-sm px-2 py-1 border rounded border-green-400 text-green-400 hover:bg-green-500 hover:text-gray-200">
-          Toggle Dark
-        </button>
-        <button onclick="toggleSearchBar()" class="px-1 py-1  text-green-400 rounded hover:bg-green-500 hover:text-gray-200 pb-2.5">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 3a7.5 7.5 0 006.15 13.65z"></path>
-    </svg>
-  </button>
-
-   
-      </nav>
+<header id="site-header" class="max-w-2xl mx-auto sticky top-0 bg-gray-900 z-50 transition-colors duration-300">
+  <div class="flex items-center justify-between p-4">
+    <!-- Logo -->
+    <div class="text-xl font-bold tracking-widest font-mono logoText text-white flex items-center space-x-2">
+      <a href="<?php echo home_url(); ?>" class="flex items-center space-x-2">
+        <?php
+        if (has_custom_logo()) {
+          $logo_id = get_theme_mod('custom_logo');
+          $logo_url = wp_get_attachment_image_src($logo_id, 'full')[0];
+          echo '<img src="' . esc_url($logo_url) . '" alt="Logo" class="w-11 h-11 rounded-sm">';
+        }
+        ?>
+        <span><?php bloginfo('name'); ?></span>
+      </a>
     </div>
-  </header>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center space-x-4 font-mono">
+      <a href="<?php echo home_url(); ?>" class="hover:underline text-green-400">Home</a>
+      <a href="#" class="hover:underline text-green-400">Blog</a>
+      <a href="#" class="hover:underline text-green-400">Contact</a>
+      <button onclick="toggleDarkMode()" class="text-sm px-2 py-1 border rounded border-green-400 text-green-400 hover:bg-green-500 hover:text-gray-200">
+        Toggle Dark
+      </button>
+      <button onclick="toggleSearchBar()" class="px-1 py-1 text-green-400 rounded hover:bg-green-500 hover:text-gray-200 pb-2.5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 3a7.5 7.5 0 006.15 13.65z" />
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile burger button -->
+    <div class="md:hidden">
+      <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')" class="text-green-400">
+        ☰
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden md:hidden flex flex-col px-4 pb-4 space-y-2 font-mono">
+    <a href="<?php echo home_url(); ?>" class="hover:underline text-green-400">Home</a>
+    <a href="#" class="hover:underline text-green-400">Blog</a>
+    <a href="#" class="hover:underline text-green-400">Contact</a>
+    <button onclick="toggleDarkMode()" class="text-sm px-2 py-1 border rounded border-green-400 text-green-400 hover:bg-green-500 hover:text-gray-200 w-fit">
+      Toggle Dark
+    </button>
+    <button onclick="toggleSearchBar()" class="px-1 py-1 text-green-400 rounded hover:bg-green-500 hover:text-gray-200 w-fit flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 3a7.5 7.5 0 006.15 13.65z" />
+      </svg><span  class="block sm:hidden">Search</span>
+    </button>
+  </div>
+</header>
