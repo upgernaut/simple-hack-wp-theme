@@ -90,3 +90,12 @@ body {
     border: 1px solid #16a34a; /* Tailwind's green-600 color */
     
   }
+
+  html.light .submenu, html.light .submenuMobile {
+    background-color: #f3f4f6;
+    color: #111827;
+  }
+
+  html.dark .submenu, html.dark .submenuMobile {
+    background-color: #111827;
+  }

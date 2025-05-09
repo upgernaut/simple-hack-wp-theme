@@ -61,7 +61,7 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
         'fallback_cb' => false,
         'walker' => new class extends Walker_Nav_Menu {
           function start_lvl(&$output, $depth = 0, $args = null) {
-            $output .= '<div class="submenu absolute hidden group-hover:flex flex-col bg-gray-800 text-green-300 mt-1 rounded shadow-lg min-w-[150px] z-10">';
+            $output .= '<div class="submenu p-4 absolute hidden group-hover:flex flex-col  mt-1 rounded shadow-lg min-w-[150px] z-10">';
           }
           function end_lvl(&$output, $depth = 0, $args = null) {
             $output .= '</div>';
@@ -75,7 +75,7 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
               $output .= '<div class="dropdown-wrapper relative group">';
               $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400 flex items-center gap-1">' . esc_html($title) . ' <span class="text-xs">▼</span></a>';
             } else {
-              $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400">' . esc_html($title) . '</a>';
+              $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400">— ' . esc_html($title) . '</a>';
             }
           }
           function end_el(&$output, $item, $depth = 0, $args = null) {
@@ -117,7 +117,7 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
       'fallback_cb' => false,
       'walker' => new class extends Walker_Nav_Menu {
         function start_lvl(&$output, $depth = 0, $args = null) {
-          $output .= '<div class="hidden flex flex-col w-full bg-gray-800 text-green-300 mt-1 rounded shadow-lg z-10">';
+          $output .= '<div class="submenuMobile hidden flex flex-col w-full mt-1 rounded shadow-lg z-10">';
         }
         function end_lvl(&$output, $depth = 0, $args = null) {
           $output .= '</div>';
