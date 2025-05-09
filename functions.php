@@ -8,10 +8,14 @@ add_theme_support('menus');
 register_nav_menus([
   'main_menu' => 'Main Menu'
 ]);
+// add_theme_support('post-thumbnails', ['post']);
 
 
 function simplehack_enqueue_assets() {
   wp_enqueue_style('simplehack-style', get_stylesheet_uri());
+
+  wp_enqueue_style('fancybox-css', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css');
+  wp_enqueue_script('fancybox-js', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js', [], false, true);
 }
 add_action('wp_enqueue_scripts', 'simplehack_enqueue_assets');
 

@@ -18,6 +18,20 @@
       }
     ?>
   </p>
+
+
+  <?php if (has_post_thumbnail()) : 
+  $img_url = get_the_post_thumbnail_url(get_the_ID(), 'large'); ?>
+  <a href="<?php echo esc_url($img_url); ?>" data-fancybox="gallery">
+    <div class="float-left mr-4 my-2 w-40">
+      <?php the_post_thumbnail('medium', ['class' => 'rounded border border-green-500']); ?>
+    </div>
+  </a>
+<?php endif; ?>
+
+
+
+
       <div class="leading-relaxed space-y-4">
         <?php the_content(); ?>
       </div>
