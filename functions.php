@@ -81,3 +81,36 @@ function mytheme_customize_register($wp_customize) {
   }
   add_action('wp_enqueue_scripts', 'mytheme_enqueue_scripts');
   
+
+
+/**
+ * Displays a breadcrumb navigation.
+ *
+ * @since 1.0.0
+ */
+  function toolnaut_breadcrumb() {
+    if (!is_front_page()) {
+      echo '<nav class="text-sm text-gray-400 mb-4 font-mono">';
+      echo '<a href="' . home_url() . '" class="hover:underline text-green-400">Home</a>';
+  
+      if (is_category() || is_single()) {
+        $category = get_the_category();
+        if (!empty($category)) {
+          echo ' / <a href="' . esc_url(get_category_link($category[0]->term_id)) . '" class="hover:underline text-green-400">' . esc_html($category[0]->name) . '</a>';
+        }
+        if (is_single()) {
+          echo ' / <span class="text-gray-500 dark:text-gray-400">' . get_the_title() . '</span>';
+        }
+      } elseif (is_page()) {
+        echo ' / <span class="text-gray-500 dark:text-gray-400">' . get_the_title() . '</span>';
+      } elseif (is_search()) {
+        echo ' / <span class="text-gray-500 dark:text-gray-400">Search results</span>';
+      } elseif (is_404()) {
+        echo ' / <span class="text-gray-500 dark:text-gray-400">Page not found</span>';
+      } elseif (is_author()) {
+        echo ' / <span class="text-gray-500 dark:text-gray-400">Author: ' . get_the_author() . '</span>';
+      }
+  
+      echo '</nav>';
+    }
+  }

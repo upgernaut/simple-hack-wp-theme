@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 <main id="main-content" class="max-w-2xl mx-auto p-4 space-y-8 transition-colors duration-300">
+<?php toolnaut_breadcrumb(); ?>
   <!-- Author Info -->
   <section class="text-center space-y-6 pb-4 border-b border-gray-300">
     <?php echo get_avatar(get_the_author_meta('ID'), 100, '', '', ['class' => 'author-avatar mx-auto']); ?>

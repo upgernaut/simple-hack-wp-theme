@@ -1,6 +1,7 @@
 <?php get_header(); ?>
 
 <main id="main-content" class="max-w-2xl mx-auto p-4 space-y-8 transition-colors duration-300">
+<?php toolnaut_breadcrumb(); ?>
   <!-- Search Header -->
   <section class="mb-8">
     <h1 class="text-4xl font-semibold mb-4">
