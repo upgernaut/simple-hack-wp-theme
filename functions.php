@@ -49,6 +49,16 @@ function mytheme_customize_register($wp_customize) {
         'light' => __('Light', 'mytheme'),
       ),
     ));
+
+    $wp_customize->add_setting('footer_text', array(
+      'default' => 'Built clean and simple.',
+      'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_control('footer_text', array(
+      'label' => 'Footer Text',
+      'section' => 'title_tagline',
+      'type' => 'textarea',
+    ));    
   }
   add_action('customize_register', 'mytheme_customize_register');
   
