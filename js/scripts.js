@@ -20,4 +20,34 @@ function toggleSearchBar() {
   const el = document.getElementById('floating-search');
   el.classList.toggle('hidden');
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listeners to all dropdown wrappers
+  const dropdownWrappers = document.querySelectorAll('.dropdown-wrapper');
   
+  dropdownWrappers.forEach(wrapper => {
+    let timeout;
+    
+    // Show dropdown on hover
+    wrapper.addEventListener('mouseenter', () => {
+      clearTimeout(timeout);
+      const submenu = wrapper.querySelector('.submenu');
+      if (submenu) {
+        submenu.classList.add('flex');
+        submenu.classList.remove('hidden');
+      }
+    });
+    
+    // Hide dropdown with delay when mouse leaves
+    wrapper.addEventListener('mouseleave', () => {
+      const submenu = wrapper.querySelector('.submenu');
+      if (submenu) {
+        timeout = setTimeout(() => {
+          submenu.classList.add('hidden');
+          submenu.classList.remove('flex');
+        }, 300); // 300ms delay before hiding
+      }
+    });
+  });
+});

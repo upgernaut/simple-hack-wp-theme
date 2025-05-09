@@ -50,24 +50,44 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
       </a>
     </div>
 
-    <!-- Desktop + Mobile nav (desktop: visible, mobile: hidden by default) -->
+    <!-- Desktop nav -->
     <nav class="hidden md:flex items-center space-x-4 font-mono relative">
-      <a href="<?php echo home_url(); ?>" class="hover:underline text-green-400">Home</a>
+      <?php
+      wp_nav_menu(array(
+        'theme_location' => 'main_menu',
+        'container' => false,
+        'menu_class' => 'flex space-x-4',
+        'items_wrap' => '%3$s',
+        'fallback_cb' => false,
+        'walker' => new class extends Walker_Nav_Menu {
+          function start_lvl(&$output, $depth = 0, $args = null) {
+            $output .= '<div class="submenu absolute hidden group-hover:flex flex-col bg-gray-800 text-green-300 mt-1 rounded shadow-lg min-w-[150px] z-10">';
+          }
+          function end_lvl(&$output, $depth = 0, $args = null) {
+            $output .= '</div>';
+          }
+          function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+            $classes = implode(' ', $item->classes);
+            $title = $item->title;
+            $url = $item->url;
 
-      <!-- Unified Dropdown -->
-      <div class="relative group">
-        <button onclick="document.getElementById('dropdownMenu').classList.toggle('hidden')" class="hover:underline text-green-400 flex items-center gap-1 md:pointer-events-none">
-          Blog <span class="text-xs">▼</span>
-        </button>
-        <div id="dropdownMenu" class="hidden group-hover:flex md:group-hover:flex md:absolute flex-col bg-gray-800 text-green-300 mt-1 rounded shadow-lg min-w-[150px] z-10">
-          <a href="#" class="px-4 py-2 hover:bg-gray-700">Sub Blog 1</a>
-          <a href="#" class="px-4 py-2 hover:bg-gray-700">Sub Blog 2</a>
-          <a href="#" class="px-4 py-2 hover:bg-gray-700">Sub Blog 3</a>
-        </div>
-      </div>
+            if (in_array('menu-item-has-children', $item->classes)) {
+              $output .= '<div class="dropdown-wrapper relative group">';
+              $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400 flex items-center gap-1">' . esc_html($title) . ' <span class="text-xs">▼</span></a>';
+            } else {
+              $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400">' . esc_html($title) . '</a>';
+            }
+          }
+          function end_el(&$output, $item, $depth = 0, $args = null) {
+            if (in_array('menu-item-has-children', $item->classes)) {
+              $output .= '</div>';
+            }
+          }
+        }
+      ));
+      ?>
 
-      <a href="#" class="hover:underline text-green-400">Contact</a>
-
+      <!-- Extras -->
       <button onclick="toggleDarkMode()" class="text-sm px-2 py-1 border rounded border-green-400 text-green-400 hover:bg-green-500 hover:text-gray-200">
         Toggle Dark
       </button>
@@ -78,7 +98,7 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
       </button>
     </nav>
 
-    <!-- Mobile burger button -->
+    <!-- Mobile burger -->
     <div class="md:hidden">
       <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')" class="text-green-400">
         ☰
@@ -88,23 +108,42 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
 
   <!-- Mobile menu -->
   <div id="mobileMenu" class="hidden md:hidden flex flex-col px-4 pb-4 space-y-2 font-mono">
-    <a href="<?php echo home_url(); ?>" class="hover:underline text-green-400">Home</a>
+    <?php
+    wp_nav_menu(array(
+      'theme_location' => 'main_menu',
+      'container' => false,
+      'menu_class' => 'flex flex-col space-y-1',
+      'items_wrap' => '%3$s',
+      'fallback_cb' => false,
+      'walker' => new class extends Walker_Nav_Menu {
+        function start_lvl(&$output, $depth = 0, $args = null) {
+          $output .= '<div class="hidden flex flex-col w-full bg-gray-800 text-green-300 mt-1 rounded shadow-lg z-10">';
+        }
+        function end_lvl(&$output, $depth = 0, $args = null) {
+          $output .= '</div>';
+        }
+        function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+          $classes = implode(' ', $item->classes);
+          $title = $item->title;
+          $url = $item->url;
 
-    <!-- Unified Dropdown for Mobile -->
-    <div class="relative group">
-      <button onclick="document.getElementById('dropdownMenuMobile').classList.toggle('hidden')" class="hover:underline text-green-400 flex items-center gap-1">
-        Blog <span class="text-xs">▼</span>
-      </button>
-      <div id="dropdownMenuMobile" class="hidden flex flex-col w-full bg-gray-800 text-green-300 mt-1 rounded shadow-lg z-10">
+          if (in_array('menu-item-has-children', $item->classes)) {
+            $output .= '<div class="relative group">';
+            $output .= '<button onclick="this.nextElementSibling.classList.toggle(\'hidden\')" class="hover:underline text-green-400 flex items-center gap-1">' . esc_html($title) . ' <span class="text-xs">▼</span></button>';
+          } else {
+            $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400">' . esc_html($title) . '</a>';
+          }
+        }
+        function end_el(&$output, $item, $depth = 0, $args = null) {
+          if (in_array('menu-item-has-children', $item->classes)) {
+            $output .= '</div>';
+          }
+        }
+      }
+    ));
+    ?>
 
-        <a href="#" class="px-4 py-2 hover:bg-gray-700">Sub Blog 1</a>
-        <a href="#" class="px-4 py-2 hover:bg-gray-700">Sub Blog 2</a>
-        <a href="#" class="px-4 py-2 hover:bg-gray-700">Sub Blog 3</a>
-      </div>
-    </div>
-
-    <a href="#" class="hover:underline text-green-400">Contact</a>
-
+    <!-- Extras -->
     <button onclick="toggleDarkMode()" class="text-sm px-2 py-1 border rounded border-green-400 text-green-400 hover:bg-green-500 hover:text-gray-200 w-fit">
       Toggle Dark
     </button>
@@ -115,5 +154,6 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
     </button>
   </div>
 </header>
+
 
 
