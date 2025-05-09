@@ -51,12 +51,12 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
     </div>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center space-x-4 font-mono relative">
+    <nav class="hidden md:flex items-center space-x-3 font-mono relative">
       <?php
       wp_nav_menu(array(
         'theme_location' => 'main_menu',
         'container' => false,
-        'menu_class' => 'flex space-x-4',
+        'menu_class' => 'flex space-x-3',
         'items_wrap' => '%3$s',
         'fallback_cb' => false,
         'walker' => new class extends Walker_Nav_Menu {
@@ -73,9 +73,11 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
 
             if (in_array('menu-item-has-children', $item->classes)) {
               $output .= '<div class="dropdown-wrapper relative group">';
-              $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400 flex items-center gap-1">' . esc_html($title) . ' <span class="text-xs">▼</span></a>';
+              $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400 flex items-center gap-1">/' . esc_html($title) . ' <span class="text-xs">▼</span></a>';
+            } elseif (0 !== $depth) {
+              $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400 pl-4 border-b-2 py-2">>> ' . esc_html($title) . '</a>';
             } else {
-              $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400">— ' . esc_html($title) . '</a>';
+              $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400">/' . esc_html($title) . '</a>';
             }
           }
           function end_el(&$output, $item, $depth = 0, $args = null) {
@@ -88,7 +90,7 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
       ?>
 
       <!-- Extras -->
-      <button onclick="toggleDarkMode()" class="text-sm px-2 py-1 border rounded border-green-400 text-green-400 hover:bg-green-500 hover:text-gray-200">
+      <button onclick="toggleDarkMode()" class="text-xs font-bold px-2 py-1 border rounded border-green-400 text-green-400 hover:bg-green-500 hover:text-gray-200">
         Toggle Dark
       </button>
       <button onclick="toggleSearchBar()" class="px-1 py-1 text-green-400 rounded hover:bg-green-500 hover:text-gray-200 pb-2.5">
@@ -129,9 +131,11 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
 
           if (in_array('menu-item-has-children', $item->classes)) {
             $output .= '<div class="relative group">';
-            $output .= '<button onclick="this.nextElementSibling.classList.toggle(\'hidden\')" class="hover:underline text-green-400 flex items-center gap-1">' . esc_html($title) . ' <span class="text-xs">▼</span></button>';
+            $output .= '<button onclick="this.nextElementSibling.classList.toggle(\'hidden\')" class="hover:underline text-green-400 flex items-center gap-1">/' . esc_html($title) . ' <span class="text-xs">▼</span></button>';
+          } elseif (0 !== $depth) { 
+            $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400 border-b-2 py-2">>> ' . esc_html($title) . '</a>';
           } else {
-            $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400">' . esc_html($title) . '</a>';
+            $output .= '<a href="' . esc_url($url) . '" class="hover:underline text-green-400">/' . esc_html($title) . '</a>';
           }
         }
         function end_el(&$output, $item, $depth = 0, $args = null) {
@@ -144,7 +148,7 @@ if (isset($_COOKIE['colorScheme']) && in_array($_COOKIE['colorScheme'], ['dark',
     ?>
 
     <!-- Extras -->
-    <button onclick="toggleDarkMode()" class="text-sm px-2 py-1 border rounded border-green-400 text-green-400 hover:bg-green-500 hover:text-gray-200 w-fit">
+    <button onclick="toggleDarkMode()" class="text-xs font-bold px-2 py-1 border rounded border-green-400 text-green-400 hover:bg-green-500 hover:text-gray-200 w-fit">
       Toggle Dark
     </button>
     <button onclick="toggleSearchBar()" class="px-1 py-1 text-green-400 rounded hover:bg-green-500 hover:text-gray-200 w-fit flex items-center gap-2">
