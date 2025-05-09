@@ -19,6 +19,12 @@ function toggleDarkMode(colorScheme = null) {
 function toggleSearchBar() {
   const el = document.getElementById('floating-search');
   el.classList.toggle('hidden');
+  
+  // Make the text field active
+  const inputField = el.querySelector('input');
+  if (inputField) {
+    inputField.focus();
+  }
 }
 
 
