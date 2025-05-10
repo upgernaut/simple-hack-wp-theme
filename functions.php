@@ -68,12 +68,6 @@ function mytheme_customize_register($wp_customize) {
   
 
   function mytheme_enqueue_scripts() {
-    $default_scheme = get_theme_mod('default_color_scheme', 'dark');
-  
-    wp_enqueue_script('theme-scripts', get_template_directory_uri() . '/js/theme.js', [], null, true);
-    wp_localize_script('theme-scripts', 'themeSettings', [
-      'defaultColorScheme' => $default_scheme
-    ]);
 
     wp_enqueue_script(
       'theme-main-js',
