@@ -1,5 +1,5 @@
 <footer id="footer" class="max-w-2xl mx-auto mt-12 border-t p-4 text-center text-sm text-gray-400 font-sans">
-    &copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?> <?php echo get_theme_mod('footer_text'); ?>
+    &copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. <?php echo get_theme_mod('footer_text'); ?>
 </footer>
 
   <?php wp_footer(); ?>
